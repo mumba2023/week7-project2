@@ -1,5 +1,5 @@
 #Vpc
-resource "aws_vpc" "vpc8019" {
+resource "aws_vpc" "vpc1" {
     cidr_block = "172.120.0.0/16"
     instance_tenancy = "default"
 
@@ -11,8 +11,8 @@ resource "aws_vpc" "vpc8019" {
 ## Subnet
 
 resource "aws_subnet" "public_subnet1" {
-    availability_zone = "us-east-a"
-    vpc_id = aws_vpc.vpc8019.id
+    availability_zone = "us-east-2a"
+    vpc_id = aws_vpc.vpc1.id
     cidr_block = "172.120.1.0/24"
     map_public_ip_on_launch = true
     tags= {
@@ -22,8 +22,8 @@ resource "aws_subnet" "public_subnet1" {
 }
 
 resource "aws_subnet" "public_subnet2" {
-    availability_zone = "us-east-1b"
-    vpc_id = aws_vpc.vpc8019.id
+    availability_zone = "us-east-2b"
+    vpc_id = aws_vpc.vpc1.id
     cidr_block = "172.120.2.0/24"
     map_public_ip_on_launch = true
     tags= {
@@ -34,8 +34,8 @@ resource "aws_subnet" "public_subnet2" {
 ## Private subnet
 
 resource "aws_subnet" "private_subnet1" {
-    availability_zone = "us-east-1a"
-    vpc_id = aws_vpc.vpc8019.id
+    availability_zone = "us-east-2a"
+    vpc_id = aws_vpc.vpc1.id
     cidr_block = "172.120.3.0/24"
     tags= {
         Name = "subnet-private-vpc"
@@ -44,8 +44,8 @@ resource "aws_subnet" "private_subnet1" {
     
 }
 resource "aws_subnet" "private_subnet2" {
-    availability_zone = "us-east-1b"
-    vpc_id = aws_vpc.vpc8019.id
+    availability_zone = "us-east-2b"
+    vpc_id = aws_vpc.vpc1.id
     cidr_block = "172.120.4.0/24"
     tags= {
         Name = "subnet-private-vpc"
@@ -55,7 +55,7 @@ resource "aws_subnet" "private_subnet2" {
 }
 ## route table 
 resource "aws_route_table" "rt1" {
-    vpc_id = aws_vpc.vpc8019.id
+    vpc_id = aws_vpc.vpc1.id
     route  {
         cidr_block = "0.0.0.0/0"
         gateway_id = aws_internet_gateway.gtw1.id
@@ -65,7 +65,7 @@ resource "aws_route_table" "rt1" {
 
 ## Gateway 
 resource "aws_internet_gateway" "gtw1" {
-    vpc_id = aws_vpc.vpc8019.id
+    vpc_id = aws_vpc.vpc1.id
     tags={
         Name = "IGW"
     }

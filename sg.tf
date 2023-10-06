@@ -3,7 +3,7 @@
 resource "aws_security_group" "sg-demo" {
     name = "webserver-sg-dev"
     description = "Allow ssh and httpd"
-    vpc_id = aws_vpc.vpc8019.id
+    vpc_id = aws_vpc.vpc1.id
 
     ingress {
         description = "allow ssh"
